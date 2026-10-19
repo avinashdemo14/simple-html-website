@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Install phase started"
+
+  build:
+    commands:
+      - echo "Build phase started"
+      - aws s3 sync . s3://simplehtmlbucket1 --delete \
+          --exclude ".git/*" \
+          --exclude ".github/*" \
+          --exclude "buildspec.yml"
+
+artifacts:
+  files:
+    - '**/*'
